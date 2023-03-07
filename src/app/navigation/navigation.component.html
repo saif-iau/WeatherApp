@@ -5,16 +5,17 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar >Menu</mat-toolbar>
     <mat-nav-list>
-     <a mat-list-item href="weatherView"> Weather View </a>
+     <a mat-list-item href="weatherView">Weather View</a>
+
       <a mat-list-item href="mapView">Map View</a>
       <a mat-list-item (click)="openLoginDialog()">Login</a>
       <a mat-list-item (click)="openRegisterDialog()">Register</a>
       <a disabled="true" mat-list-item> <mat-slide-toggle class="toggle" (toggleChange)="switchTheme()"></mat-slide-toggle> </a>
 
-      
-      
 
-      
+
+
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

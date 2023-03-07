@@ -24,7 +24,11 @@
 .vertical {
   border-left: 2px solid var(--text-color);
 }
-
+mat-list-item {
+  text-decoration: none;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
 .mat-toolbar.mat-primary{
   background-color: var(--background-color);
   color: var(--text-color);
@@ -34,17 +38,14 @@ ng-container {
   background-color: var(--background-color);
   color: var(--text-color);
 }
-mat-nav-list {
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-body {
- 
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--background-color);
-  position: relative;
-  transition: all .3s ease-in-out;
-}
+
+// body {
+
+//   font-family: Arial, Helvetica, sans-serif;
+//   background-color: var(--background-color);
+//   position: relative;
+//   transition: all .3s ease-in-out;
+// }
 
 
 
