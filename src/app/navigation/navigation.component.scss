@@ -1,3 +1,4 @@
+
 .sidenav-container {
   height: 100%;
   align-items: center;
@@ -6,6 +7,7 @@
 
 .sidenav {
   width: 150px;
+  
 }
 
 .sidenav .mat-toolbar {
@@ -20,4 +22,7 @@
 
 .buttons{
   position: relative;
+}
+.toggle {
+  align-self: center;
 }

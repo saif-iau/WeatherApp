@@ -1,14 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
 
-html, body { height: 100%; }
+.light-theme {
+  --background-color: #f5f5f5;
+  --text-color: #1a1a1a;
+  --box-color: #fff;
+  --button-color: #fff;
+
+  --box-shadow: 0 15px 25px rgba(0, 0, 0, .1);
+}
+
+.dark-theme {
+  --background-color: #000000;
+  --text-color: #f5f5f5;
+  --box-color: #2b2b2b;
+  --button-color: #1a1a1a;
+}
+.content table {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 1vh;
+}
+.content  {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.vertical {
+  border-left: 2px solid var(--text-color);
+}
+
+.mat-toolbar.mat-primary{
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
 
 
-$my-primary: mat.define-palette(mat.$indigo-palette, 500);
-$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+mat-nav-list {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+body {
+ 
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background-color);
+  position: relative;
+  transition: all .3s ease-in-out;
+}
 
-// The "warn" palette is optional and defaults to red if not specified.
-$my-warn: mat.define-palette(mat.$red-palette);
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.header {
+  color: var(--text-color);
+}
+
+
+
+.paragraph {
+  color: var(--text-color);
+  transition: all .1s ease;
+}
+
+.toggle {
+ outline: none;
+ border: 0;
+ cursor: pointer;
+ padding: 10px 15px;
+ border-radius: 9px;
+ background-color: var(--text-color);
+ color: var(--button-color);
+ transition: all .1s ease;
+}
+
+html, body { height: 100%; margin: 0;}
 
 

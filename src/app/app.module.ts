@@ -21,6 +21,9 @@ import { AuthguardGuard } from 'src/guards/authguard.guard';
 import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
 import {MatTableModule} from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
+//import { AgmCoreModule } from '@agm/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 
@@ -35,7 +38,10 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    MatButtonToggleModule,
     MatTableModule,
+    ReactiveFormsModule,
     MatSidenavModule,
     MatSlideToggleModule,
     MatToolbarModule,
@@ -48,7 +54,11 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     LayoutModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    // AgmCoreModule.forRoot({ 
+    //   apiKey: 'AIzaSyA_jQkmecgkZFC6OF895tGGD0ULmeHSN0c'
+      
+    //  })
   ],
   providers: [],
   bootstrap: [AppComponent , AuthguardGuard]

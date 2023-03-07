@@ -1,6 +1,5 @@
 export interface WeatherObject {
-    lat:number;
-    lng:number;
+    index:number;
     temp:number;
     city:string;
 }
