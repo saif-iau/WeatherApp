@@ -1,7 +1,10 @@
 table {
-    width: 60%;
+    width: 100%;
     margin: 3vw;
     
+}
+mat-form-field {
+    margin: 1vh ;
 }
 
 .content {
@@ -19,7 +22,7 @@ table {
     
 }
 .vertical {
-    border-left: 2px solid black;
+  
     height: 60px;
    margin: 10px;
     left: 50%;
