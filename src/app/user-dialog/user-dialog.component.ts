@@ -26,21 +26,28 @@ export class UserDialogComponent {
   });
 
   login(){
- 
+
 
 this.userservice.getUsers().subscribe(obj => {
       this.userSet = obj;
       console.log(obj);
  });
      let found = true;
-      
-      
+      this.userSet.forEach( (x) => {
+          if(x.username == this.form.get('username')?.value ){
+            found = true;
+          }
+          else {
+            found = false;
+          }
+      });
+
         if(found){
      localStorage.setItem( 'mytoken','true');
      this.form.reset();
      this.dialog.closeAll;
      alert('welcome : ' + this.form.get('username')?.value);
-    
+
 //   this.router.navigate(['./WeatherView']);
    }
    else {
@@ -50,12 +57,12 @@ this.userservice.getUsers().subscribe(obj => {
 
  };
 
-  
-  
+
+
 
   openRegisterDialog(): void {
     const dialogRef = this.dialog.open(RegisterDialogComponent, {
       width: '280px',
-      
+
     })};
 }

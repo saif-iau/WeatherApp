@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { userObject } from './UserObject';
 
 @Injectable({
@@ -9,14 +9,16 @@ export class UserListService {
 
   constructor() { }
 
- private array = new Subject<Set<userObject>>();
-
+ private array = new BehaviorSubject<any>({});
+  selectedarray = this.array.asObservable();
  public getUsers(): Observable<Set<userObject>> {
   return this.array.asObservable();
 }
 
 public setUsers(set: Set<userObject>) {
+
   return this.array.next(set);
+
 }
 
 }
