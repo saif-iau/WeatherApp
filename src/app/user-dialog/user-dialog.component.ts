@@ -32,10 +32,12 @@ this.userservice.getUsers().subscribe(obj => {
       this.userSet = obj;
       console.log(obj);
  });
-     let found = true;
+     let found = false;
       this.userSet.forEach( (x) => {
           if(x.username == this.form.get('username')?.value ){
             found = true;
+            console.log('found it');
+
           }
           else {
             found = false;
