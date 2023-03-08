@@ -1,37 +1,22 @@
 <div class="content">
-
-  <div class="search">
-    <mat-label> find temperature</mat-label>
-    <div class="vertical"></div>
-    <form [formGroup]="form">
-        <mat-form-field>
-            <mat-label>latitude</mat-label>
-            <input matInput placeholder="latitude" formControlName="lat">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>longitude</mat-label>
-            <input matInput placeholder="longitude" formControlName="lng">
-          </mat-form-field>
-          <button mat-raised-button type="submit"  (click)="getData()">Add</button>
-    </form>
-  </div>
+<app-addweather></app-addweather>
   <br>
   <div class="table">
     <table mat-table  [dataSource]="dataSource">
 
       <ng-container matColumnDef="index">
         <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> 6 </td>
+        <td mat-cell *matCellDef="let element"> {{element.index}} </td>
       </ng-container>
 
       <ng-container matColumnDef="city">
         <th mat-header-cell *matHeaderCellDef> city </th>
-        <td mat-cell *matCellDef="let element"> 67</td>
+        <td mat-cell *matCellDef="let element"> {{element.city}}</td>
       </ng-container>
 
       <ng-container matColumnDef="temp">
-        <th mat-header-cell *matHeaderCellDef> temp </th>
-        <td mat-cell *matCellDef="let element"> 5 </td>
+        <th mat-header-cell *matHeaderCellDef> temperature </th>
+        <td mat-cell *matCellDef="let element"> {{element.temp}} </td>
       </ng-container>
 
       <ng-container matColumnDef="actions" class="actions">
@@ -40,7 +25,7 @@
         <td mat-cell *matCellDef="let row;  let i = index" >
 
           <button mat-button color="accent"   >Edit</button>
-          <button mat-button color="primary"   >Delete</button>
+          <button mat-button color="accent"   >Delete</button>
         </td>
       </ng-container>
 

@@ -1,6 +1,7 @@
 .table {
 
-  margin: 50px 40px;
+  margin: 10px 80px;
+  padding: auto 80px;
     text-align: center;
     width: 100%;
   table-layout: fixed;
@@ -34,11 +35,11 @@ mat-form-field {
 }
 
 
-.actions{
+ button{
 
   flex: none;
   width: 50px;
-
+  margin-left: 15px;
 
 }
 .actionHeader {

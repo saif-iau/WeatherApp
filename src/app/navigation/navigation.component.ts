@@ -17,6 +17,19 @@ import { DOCUMENT } from '@angular/common';
 export class NavigationComponent implements OnInit {
   ngOnInit() {
     this.initializeTheme();
+   
+  }
+  isloggedout(){
+    if(!localStorage.getItem('mytoken')){
+         return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  logout(){
+    localStorage.removeItem('mytoken');
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

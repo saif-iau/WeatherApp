@@ -10,6 +10,7 @@
       <a mat-list-item href="mapView">Map View</a>
       <a mat-list-item (click)="openLoginDialog()">Login</a>
       <a mat-list-item (click)="openRegisterDialog()">Register</a>
+      <a mat-list-item (click)="logout()" *ngIf="isloggedout()">Logout</a>
       <a disabled="true" mat-list-item> <mat-slide-toggle class="toggle" (toggleChange)="switchTheme()"></mat-slide-toggle> </a>
 
 
@@ -31,5 +32,6 @@
       <span>WeatherApp</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
+    <p *ngIf="!isloggedout()">Log in to view this page</p>
   </mat-sidenav-content>
 </mat-sidenav-container>

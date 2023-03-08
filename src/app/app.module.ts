@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { AddweatherComponent } from './addweather/addweather.component';
 
 
 
@@ -34,7 +35,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MapComponent,
     UserDialogComponent,
     WeatherViewComponent,
-    RegisterDialogComponent
+    RegisterDialogComponent,
+    AddweatherComponent
   ],
   imports: [
     BrowserModule,

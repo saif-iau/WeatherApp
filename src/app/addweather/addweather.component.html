@@ -1,0 +1,16 @@
+
+<div class="search">
+    <mat-label> find temperature</mat-label>
+    <div class="vertical"></div>
+    <form [formGroup]="form">
+        <mat-form-field>
+            <mat-label>latitude</mat-label>
+            <input matInput placeholder="latitude" formControlName="lat">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>longitude</mat-label>
+            <input matInput placeholder="longitude" formControlName="lng">
+          </mat-form-field>
+          <button mat-raised-button type="submit"  (click)="addData()">Add</button>
+    </form>
+  </div>

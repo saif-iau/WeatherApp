@@ -1,8 +1,10 @@
 import { DataSource } from '@angular/cdk/collections';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs';
+import { AddweatherComponent } from '../addweather/addweather.component';
+import { WeatherService } from '../weather.service';
 import { WeatherObject } from '../WeatherObject';
 
 @Component({
@@ -13,26 +15,46 @@ import { WeatherObject } from '../WeatherObject';
 export class WeatherViewComponent implements OnInit {
   
   WeatherSet = new Set<WeatherObject>();
-
-  constructor(private http:HttpClient){
-   
+ 
+  constructor(private http:HttpClient , private service:WeatherService){
+    service.refresh.subscribe(() => {
+      this.getData(1,2);
+  } )
   }
   ngOnInit(): void {
   
   }
-  form = new FormGroup({
-    lat: new FormControl('',Validators.required),
-    lng: new FormControl('',Validators.required),
-  });
+ 
+  ELEMENT_DATA: WeatherObject[] = [
+    {
+      index: 1,
+      temp: 23,
+      city:'khobar'
+    },
+    {
+      index: 1,
+      temp: 23,
+      city:'khobar'
+    },
+    {
+      index: 1,
+      temp: 23,
+      city:'khobar'
+    },
+    {
+      index: 1,
+      temp: 23,
+      city:'khobar'
+    }
+  ];
   
-  data1: WeatherObject[] = [];
-  dataSource = this.data1;
+  
+  dataSource = this.ELEMENT_DATA;
   displayedColumns: string[] = ['index' , 'city' , 'temp' , 'actions'];
 
-   getData(){
-    let lat = this.form.get('lat')?.value;
-    let lng = this.form.get('lng')?.value;
-    var url = 'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m';
+   getData(lat:any , lng:any ){
+   
+    var url = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lng+'1&hourly=temperature_2m';
   
     console.log(  this.http.get(url));
     this.jsonToClass(  this.http.get(url) );
@@ -48,8 +70,11 @@ export class WeatherViewComponent implements OnInit {
     });
 
     console.log(this.WeatherSet);
-    
+   
    }
+
+
+   
   
 
 }
