@@ -53,11 +53,15 @@ export class WeatherViewComponent implements OnInit {
   displayedColumns: string[] = ['index' , 'city' , 'temp' , 'actions'];
 
    getData(lat:any , lng:any ){
-   
-    var url = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lng+'1&hourly=temperature_2m';
+    this.dataSource.push({
+      index:this.dataSource.length++,
+      city:'khobar',
+      temp:3,
+    })
+    // var url = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lng+'1&hourly=temperature_2m';
   
-    console.log(  this.http.get(url));
-    this.jsonToClass(  this.http.get(url) );
+    // console.log(  this.http.get(url));
+    // this.jsonToClass(  this.http.get(url) );
      
    }
 
