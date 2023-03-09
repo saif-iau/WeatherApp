@@ -34,13 +34,13 @@ export class WeatherViewComponent implements OnInit {
     {
       index: 1,
       temp: 23,
-      city:'khobar'
+      city:'jeddah'
     },
    
   ];
   
   
-  dataSource = [...this.ELEMENT_DATA];
+  dataSource = this.ELEMENT_DATA;
   displayedColumns: string[] = ['index' , 'city' , 'temp' , 'actions'];
 
    
@@ -54,11 +54,14 @@ export class WeatherViewComponent implements OnInit {
     this.temp = obj;
   })
 
-   this.ELEMENT_DATA.push({
-    index:this.ELEMENT_DATA.length++,
-    city: this.city,
-    temp: this.temp,
-   });
+  if(this.city != undefined){
+    this.ELEMENT_DATA.push({
+      index:this.ELEMENT_DATA.length + 1,
+      city: this.city+'',
+      temp: this.temp,
+     });
+  }
+
     this.table.renderRows();
    console.log(this.dataSource);
   }
