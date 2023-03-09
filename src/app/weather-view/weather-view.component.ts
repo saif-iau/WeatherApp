@@ -2,6 +2,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatTable } from '@angular/material/table';
 import { map } from 'rxjs';
 import { AddweatherComponent } from '../addweather/addweather.component';
 import { WeatherService } from '../weather.service';
@@ -16,66 +17,52 @@ export class WeatherViewComponent implements OnInit {
   
   WeatherSet = new Set<WeatherObject>();
  
-  constructor(private http:HttpClient , private service:WeatherService){
+  constructor(private http:HttpClient , private service:WeatherService , ){
     service.refresh.subscribe(() => {
-      this.getData(1,2);
+      this.InsertData();
   } )
+
+  
   }
   ngOnInit(): void {
   
   }
- 
+  @ViewChild(MatTable) table!: MatTable<WeatherObject>;
+   city!:string;
+   temp!:number;
   ELEMENT_DATA: WeatherObject[] = [
     {
       index: 1,
       temp: 23,
       city:'khobar'
     },
-    {
-      index: 1,
-      temp: 23,
-      city:'khobar'
-    },
-    {
-      index: 1,
-      temp: 23,
-      city:'khobar'
-    },
-    {
-      index: 1,
-      temp: 23,
-      city:'khobar'
-    }
+   
   ];
   
   
-  dataSource = this.ELEMENT_DATA;
+  dataSource = [...this.ELEMENT_DATA];
   displayedColumns: string[] = ['index' , 'city' , 'temp' , 'actions'];
 
-   getData(lat:any , lng:any ){
-    this.dataSource.push({
-      index:this.dataSource.length++,
-      city:'khobar',
-      temp:3,
-    })
-    // var url = 'https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lng+'1&hourly=temperature_2m';
-  
-    // console.log(  this.http.get(url));
-    // this.jsonToClass(  this.http.get(url) );
-     
-   }
-
-   jsonToClass(json:any){
-    var len = this.WeatherSet.size+1;
-    this.WeatherSet.add({
-      index: len,
-      temp:json['temperature'][0],
-      city:'khobar',
-    });
-
-    console.log(this.WeatherSet);
    
-   }
+  InsertData(){
+
+  let city = this.service.getCity().subscribe((obj) => {
+    this.city = obj;
+  })
+
+  let temp = this.service.getTemp().subscribe((obj) => {
+    this.temp = obj;
+  })
+
+   this.ELEMENT_DATA.push({
+    index:this.ELEMENT_DATA.length++,
+    city: this.city,
+    temp: this.temp,
+   });
+    this.table.renderRows();
+   console.log(this.dataSource);
+  }
+  
 
 
    
