@@ -3,14 +3,13 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar >Menu</mat-toolbar>
+    <mat-toolbar color="primary" >Menu</mat-toolbar>
     <mat-nav-list>
-     <a mat-list-item href="weatherView">Weather View</a>
-
-      <a mat-list-item href="mapView">Map View</a>
-      <a mat-list-item (click)="openLoginDialog()">Login</a>
-      <a mat-list-item (click)="openRegisterDialog()">Register</a>
-      <a mat-list-item (click)="logout()" *ngIf="isloggedout()">Logout</a>
+      <a color="primary"   href="weatherView">Weather View</a>
+      <a color="primary"  href="mapView">Map View</a>
+      <a color="primary"  (click)="openLoginDialog()">Login</a>
+      <a color="primary"  (click)="openRegisterDialog()">Register</a>
+      <a color="primary"  (click)="logout()" *ngIf="isloggedout()">Logout</a>
       <a disabled="true" mat-list-item> <mat-slide-toggle class="toggle" (toggleChange)="switchTheme()"></mat-slide-toggle> </a>
 
 
@@ -32,6 +31,6 @@
       <span>WeatherApp</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
-    <p *ngIf="!isloggedout()">Log in to view this page</p>
+    <p  *ngIf="!isloggedout()">Log in to view this page</p>
   </mat-sidenav-content>
 </mat-sidenav-container>

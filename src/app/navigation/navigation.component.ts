@@ -30,6 +30,8 @@ export class NavigationComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('mytoken');
+    localStorage.removeItem('myrole');
+   
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

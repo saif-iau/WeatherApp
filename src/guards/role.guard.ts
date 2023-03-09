@@ -6,20 +6,19 @@ import { AuthServiceService } from 'src/app/auth-service.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthguardGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
+
   constructor(private auth:AuthServiceService , private router:Router){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(this.auth.isLoggedIn()){
-     return true;
-    }
-    else{
-     // this.router.navigate(['./login']);
-      return false;
-    }
+      if(this.auth.isAdmin()){
+        return true;
+       }
+       else{
+        
+         return false;
+       }
   }
-
-  
   
 }

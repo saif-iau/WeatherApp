@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 import { AuthServiceService } from '../auth-service.service';
 import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
 import { UserListService } from '../user-list.service';
@@ -26,21 +27,22 @@ export class UserDialogComponent {
   });
 
   login(){
-
-
+    this.adminLogin();
+ 
 this.userservice.getUsers().subscribe(obj => {
       this.userSet = obj;
-      console.log(obj);
+     
  });
      let found = false;
       this.userSet.forEach( (x) => {
-          if(x.username == this.form.get('username')?.value ){
+          if(x.username == this.form.get('username')?.value && x.password == this.form.get('password')?.value  ){
             found = true;
             console.log('found it');
 
           }
           else {
             found = false;
+            console.log('user doesnt exist');
           }
       });
 
@@ -51,11 +53,15 @@ this.userservice.getUsers().subscribe(obj => {
      alert('welcome : ' + this.form.get('username')?.value);
 
 //   this.router.navigate(['./WeatherView']);
+          
    }
+  
    else {
     localStorage.removeItem('mytoken');
     alert('cannot find user');
    }
+
+ 
 
  };
 
@@ -67,4 +73,27 @@ this.userservice.getUsers().subscribe(obj => {
       width: '280px',
 
     })};
+
+
+    adminLogin(){
+     if(this.loggedIn()){
+      return;
+     }
+      if(this.form.get('username')?.value == environment.Admin && this.form.get('password')?.value == environment.pass ){
+        localStorage.setItem('myrole' , 'admin');
+        localStorage.setItem( 'mytoken','true');
+        alert('welcome admin : '+this.form.get('username')?.value );
+     }
+  
+    }
+
+    loggedIn(): Boolean{
+     if (localStorage.getItem('mytoken') == 'true'){
+        alert('You are aleady logged in !')
+        return true
+   }
+   else {
+    return false;
+   }
+    }
 }
