@@ -63,6 +63,7 @@ export class WeatherViewComponent implements OnInit {
   }
 
     this.table.renderRows();
+    
    console.log(this.dataSource);
   }
   
