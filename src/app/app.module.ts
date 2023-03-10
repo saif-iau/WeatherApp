@@ -25,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { AddweatherComponent } from './addweather/addweather.component';
+import { AgmCoreModule } from '@agm/core';
+
 
 
 
@@ -40,6 +42,9 @@ import { AddweatherComponent } from './addweather/addweather.component';
   ],
   imports: [
     BrowserModule,
+    AgmCoreModule.forRoot(
+     { apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'}
+    ),
     FormsModule,
     MatButtonToggleModule,
     MatTableModule,
@@ -57,7 +62,7 @@ import { AddweatherComponent } from './addweather/addweather.component';
     LayoutModule,
     MatIconModule,
     MatListModule,
-   
+
   ],
   providers: [],
   bootstrap: [AppComponent , AuthguardGuard]

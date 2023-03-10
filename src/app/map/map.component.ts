@@ -7,7 +7,12 @@ import { Component } from '@angular/core';
 })
 export class MapComponent {
 
+  lat = 26.2172;
+  lng = 50.1971;
 
-  
-  
+  constructor(){
+
+  }
+
+
 }
