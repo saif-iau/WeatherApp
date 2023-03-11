@@ -14,18 +14,18 @@ import { WeatherObject } from '../WeatherObject';
   styleUrls: ['./weather-view.component.scss']
 })
 export class WeatherViewComponent implements OnInit {
-  
+
   WeatherSet = new Set<WeatherObject>();
- 
+
   constructor(private http:HttpClient , private service:WeatherService , ){
     service.refresh.subscribe(() => {
       this.InsertData();
   } )
 
-  
+
   }
   ngOnInit(): void {
-  
+
   }
   @ViewChild(MatTable) table!: MatTable<WeatherObject>;
    city!:string;
@@ -36,14 +36,14 @@ export class WeatherViewComponent implements OnInit {
       temp: 23,
       city:'jeddah'
     },
-   
+
   ];
-  
-  
+
+
   dataSource = this.ELEMENT_DATA;
   displayedColumns: string[] = ['index' , 'city' , 'temp' , 'actions'];
 
-   
+
   InsertData(){
 
   let city = this.service.getCity().subscribe((obj) => {
@@ -63,13 +63,42 @@ export class WeatherViewComponent implements OnInit {
   }
 
     this.table.renderRows();
-    
+
    console.log(this.dataSource);
   }
-  
 
 
-   
-  
+  isAdmin(): Boolean{
+    if(localStorage.getItem('myrole') == 'admin'){
+     return true
+    }
+    else {
+      this.displayedColumns = ['index' , 'city' , 'temp' ];
+      return false
+    }
+  }
+
+  delete(row:any){
+    let index = row;
+    alert(index);
+  this.ELEMENT_DATA.forEach( (obj) => {
+    if(obj.index == index){
+      this.ELEMENT_DATA.splice(index,1);
+
+      if(this.ELEMENT_DATA.length == 1){
+        this.ELEMENT_DATA.pop()
+
+      }
+    }
+  })
+
+  this.InsertData();
+  }
+
+  edit(){
+
+  }
+
+
 
 }

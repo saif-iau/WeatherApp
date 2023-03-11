@@ -3,3 +3,10 @@ agm-map {
   width: 400px;
   padding: auto;
 }
+
+.container {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+}
