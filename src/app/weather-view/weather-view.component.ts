@@ -2,9 +2,11 @@ import { DataSource } from '@angular/cdk/collections';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { map } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { AddweatherComponent } from '../addweather/addweather.component';
+import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 import { WeatherService } from '../weather.service';
 import { WeatherObject } from '../WeatherObject';
 
@@ -17,28 +19,25 @@ export class WeatherViewComponent implements OnInit {
 
   WeatherSet = new Set<WeatherObject>();
 
-  constructor(private http:HttpClient , private service:WeatherService , ){
+  constructor(private http:HttpClient , private service:WeatherService ,public dialog: MatDialog ){
     service.refresh.subscribe(() => {
       this.InsertData();
+      service.reindex.subscribe(() => {
+        this.reindex();
+      })
   } )
 
 
   }
   ngOnInit(): void {
-
+   this.table.renderRows();
   }
   @ViewChild(MatTable) table!: MatTable<WeatherObject>;
    city!:string;
    temp!:number;
-  ELEMENT_DATA: WeatherObject[] = [
-    {
-      index: 1,
-      temp: 23,
-      city:'jeddah'
-    },
+  ELEMENT_DATA: WeatherObject[] = [];
 
-  ];
-
+  
 
   dataSource = this.ELEMENT_DATA;
   displayedColumns: string[] = ['index' , 'city' , 'temp' , 'actions'];
@@ -65,6 +64,7 @@ export class WeatherViewComponent implements OnInit {
     this.table.renderRows();
 
    console.log(this.dataSource);
+  this.reindex();
   }
 
 
@@ -79,24 +79,49 @@ export class WeatherViewComponent implements OnInit {
   }
 
   delete(row:any){
-    let index = row;
-    alert(index);
-  this.ELEMENT_DATA.forEach( (obj) => {
-    if(obj.index == index){
-      this.ELEMENT_DATA.splice(index,1);
-
-      if(this.ELEMENT_DATA.length == 1){
-        this.ELEMENT_DATA.pop()
-
+    let index = row+1;
+  
+  if(this.ELEMENT_DATA.length > 1){
+    this.ELEMENT_DATA.forEach( (obj) => {
+      if(obj.index == index){
+        this.ELEMENT_DATA.splice(index-1,1);
+        
       }
-    }
-  })
-
-  this.InsertData();
+    })
+  }
+  else {
+   this.ELEMENT_DATA.splice(0,1);
+  }
+   this.reindex();
+  this.table.renderRows();
   }
 
-  edit(){
+  edit( row:any){
+this.dialog.open(UpdateDialogComponent , {
+  width:'300px'
+})
+   let city = '';
+   let temp = 0;
+   this.service.getupdatecity().subscribe((obj) => {
+   city = obj;
+  })
+   this.service.getupdatetemp().subscribe((obj) => {
+   temp = obj;
+  })
+ 
+  this.ELEMENT_DATA[row] = {index:row , city:city , temp:temp}; 
 
+  this.table.renderRows();
+  console.log(this.ELEMENT_DATA[row]);
+  }
+
+  reindex(){
+    this.ELEMENT_DATA.sort((a,b) => a.index - b.index);
+    this.ELEMENT_DATA.forEach((obj , i = 1) => {
+      
+     obj.index  = i++;
+   
+    });
   }
 
 

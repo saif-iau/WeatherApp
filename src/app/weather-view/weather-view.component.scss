@@ -1,19 +1,21 @@
 .table {
 
-  margin: 10px 80px;
-  padding: auto 80px;
+  margin: 10px 150px;
+  padding: auto 150px;
     text-align: center;
-    width: 100%;
+    width: 70%;
   table-layout: fixed;
   align-items: center;
   align-content: center;
   align-self: center;
+ 
 }
 mat-form-field {
     margin: 1vh ;
 }
 
 .content {
+  
     padding: 2vh;
     display: flex;
    flex-direction: column;

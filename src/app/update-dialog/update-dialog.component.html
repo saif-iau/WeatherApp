@@ -1,0 +1,19 @@
+<div mat-dialog-content class="box">
+    <mat-label>Register Dialog</mat-label>
+      <form [formGroup]="form">
+          <mat-form-field>
+              <mat-label>City</mat-label>
+              <input formControlName="city" matInput placeholder="City">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Temperature</mat-label>
+              <input formControlName="temp" matInput placeholder="Temperature">
+            </mat-form-field>
+            <div class="buttons">
+              <button mat-raised-button color="warm" (click)="update()">Update</button>
+          </div>
+      </form>
+  
+     
+      
+  </div>
