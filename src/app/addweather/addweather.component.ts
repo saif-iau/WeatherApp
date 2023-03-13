@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { CityData } from 'src/models/city.model';
 import { WeatherData } from 'src/models/weather.model';
@@ -23,27 +24,17 @@ form = new FormGroup({
 });
 
  // API call
- addData(){
+ async addData(){
   let lat = this.form.get('lat')?.value;
   let lng = this.form.get('lng')?.value;
 
 
-let cityAPI = this.http.get<CityData>('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+lat+'&longitude='+lng+'&localityLanguage=en')
-.subscribe((obj) => {
-   this.city = obj.city;
-  console.log("city : " + obj.city);
-  
-});
-
-
-let tempAPI = this.http.get<WeatherData>('https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lng+'&hourly=temperature_2m')
-.subscribe((obj) => {
-  let res = obj.hourly.temperature_2m[1];
-  this.Temp = res
-  console.log("temperature : " + res);
-})
+let cityAPI = await lastValueFrom( this.http.get<CityData>('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+lat+'&longitude='+lng+'&localityLanguage=en'));
+let tempAPI = await lastValueFrom(this.http.get<WeatherData>('https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lng+'&hourly=temperature_2m'));
     
- 
+  this.city = cityAPI.city;
+  let len = tempAPI.hourly.temperature_2m.length / 2;
+  this.Temp = tempAPI.hourly.temperature_2m[len];
   this.service.setCity(this.city);
   this.service.setTemp(this.Temp);  
 

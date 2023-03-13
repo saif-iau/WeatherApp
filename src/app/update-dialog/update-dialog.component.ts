@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { WeatherData } from 'src/models/weather.model';
 import { WeatherService } from '../weather.service';
 
@@ -10,7 +10,7 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['./update-dialog.component.scss']
 })
 export class UpdateDialogComponent {
-constructor(public dialog: MatDialog , private service: WeatherService){
+constructor(private dialog: MatDialogRef<UpdateDialogComponent> , private service: WeatherService){
 
 }
 form = new FormGroup({
@@ -19,9 +19,13 @@ form = new FormGroup({
 });
 
 update(){
- this.service.setupdatecity(this.form.get('city')?.value);
- this.service.setupdatetemp(this.form.get('temp')?.value);
-  this.dialog.closeAll();
+  let x = [];
+  x[0] = this.form.get('city')?.value;
+  x[1] = this.form.get('temp')?.value;
+
+  this.dialog.close(x);
+
+ 
  
 }
 

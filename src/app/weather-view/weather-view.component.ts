@@ -4,8 +4,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { filter, map } from 'rxjs';
-import { AddweatherComponent } from '../addweather/addweather.component';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 import { WeatherService } from '../weather.service';
 import { WeatherObject } from '../WeatherObject';
@@ -35,7 +33,9 @@ export class WeatherViewComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<WeatherObject>;
    city!:string;
    temp!:number;
-  ELEMENT_DATA: WeatherObject[] = [];
+   updatecity!:string;
+   updatetemp!:number;
+   ELEMENT_DATA: WeatherObject[] = [];
 
   
 
@@ -97,22 +97,26 @@ export class WeatherViewComponent implements OnInit {
   }
 
   edit( row:any){
-this.dialog.open(UpdateDialogComponent , {
-  width:'300px'
-})
-   let city = '';
-   let temp = 0;
-   this.service.getupdatecity().subscribe((obj) => {
-   city = obj;
-  })
-   this.service.getupdatetemp().subscribe((obj) => {
-   temp = obj;
-  })
- 
-  this.ELEMENT_DATA[row] = {index:row , city:city , temp:temp}; 
 
-  this.table.renderRows();
-  console.log(this.ELEMENT_DATA[row]);
+    
+
+ this.dialog.open(UpdateDialogComponent , {
+  width:'300px'
+}).afterClosed().subscribe((data) => {
+ console.log(data);
+ this.updatecity = data[0];
+ this.updatetemp = data[1];
+})
+   
+ 
+  if(this.updatecity != '' && this.updatetemp != 0){
+    this.ELEMENT_DATA[row] = {index:row , city:this.updatecity , temp:this.updatetemp}; 
+    this.table.renderRows();
+
+  }
+   this.updatecity = ''
+   this.updatetemp = 0;
+ 
   }
 
   reindex(){
@@ -122,6 +126,15 @@ this.dialog.open(UpdateDialogComponent , {
      obj.index  = i++;
    
     });
+  }
+  
+  hide(): Boolean{
+  if(localStorage.getItem('mytoken')){
+    return true;
+  }
+  else {
+    return false;
+  }
   }
 
 

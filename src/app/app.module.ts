@@ -26,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { AddweatherComponent } from './addweather/addweather.component';
 import { AgmCoreModule } from '@agm/core';
+import { UpdateDialogComponent } from './update-dialog/update-dialog.component';
 
 
 
@@ -38,13 +39,14 @@ import { AgmCoreModule } from '@agm/core';
     UserDialogComponent,
     WeatherViewComponent,
     RegisterDialogComponent,
-    AddweatherComponent
+    AddweatherComponent,
+    UpdateDialogComponent,
   ],
   imports: [
     BrowserModule,
-    AgmCoreModule.forRoot(
-     { apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'}
-    ),
+    AgmCoreModule.forRoot({
+     // apiKey:'AIzaSyA_jQkmecgkZFC6OF895tGGD0ULmeHSN0c'
+    }),
     FormsModule,
     MatButtonToggleModule,
     MatTableModule,

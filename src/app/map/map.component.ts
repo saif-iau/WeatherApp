@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-map',
@@ -6,13 +7,29 @@ import { Component } from '@angular/core';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent {
-
-  lat = 26.2172;
-  lng = 50.1971;
-
-  constructor(){
-
+  lat!:number;
+  lng!:number;
+  zoom = 2;
+  constructor( @Inject(DOCUMENT) private document: Document){
   }
 
 
+
+  mapClicked(lat:any , lng:any){
+ alert(lat);
+  }
+  
+ 
+
+  hide(): Boolean{
+    if(localStorage.getItem('mytoken')){
+      return true;
+    }
+    else {
+      return false;
+    }
+    }
+
+
 }
+
