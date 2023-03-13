@@ -5,8 +5,8 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar color="primary" >Menu</mat-toolbar>
     <mat-nav-list>
-      <a color="primary"   href="weatherView">Weather View</a>
-      <a color="primary"   href="mapView">Map View</a>
+      <a color="primary"  (click)="goToWeather()">Weather View</a>
+      <a color="primary"   (click)="goToMap()">Map View</a>
       <a color="primary"  (click)="openLoginDialog()">Login</a>
       <a color="primary"  (click)="openRegisterDialog()">Register</a>
       <a color="primary"  (click)="logout()" *ngIf="isloggedout()">Logout</a>

@@ -31,6 +31,7 @@ register(){
    this.service.setUsers(this.userSet);
    console.log(this.userSet);
    alert('You are registered, welcome : ' + this.form.get('username')?.value);
+   this.service.closeDialog.next(true);
   }
 }
 

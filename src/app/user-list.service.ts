@@ -8,7 +8,8 @@ import { userObject } from './UserObject';
 export class UserListService {
 
   constructor() { }
-
+  closeDialog = new Subject();
+  //----------------
  private array = new BehaviorSubject<any>({});
   selectedarray = this.array.asObservable();
  public getUsers(): Observable<Set<userObject>> {

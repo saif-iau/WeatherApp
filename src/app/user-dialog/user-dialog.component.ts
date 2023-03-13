@@ -49,7 +49,7 @@ this.userservice.getUsers().subscribe(obj => {
         if(found){
      localStorage.setItem( 'mytoken','true');
      this.form.reset();
-     this.dialog.closeAll;
+     this.userservice.closeDialog.next(true);
      alert('welcome : ' + this.form.get('username')?.value);
 
 //   this.router.navigate(['./WeatherView']);

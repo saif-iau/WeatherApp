@@ -13,6 +13,7 @@ export class WeatherService {
   reindex = new Subject();
   update = new Subject();
 
+
 //-------------------------------------------
   private temp = new BehaviorSubject<any>({});
   selectedTemp = this.temp.asObservable();

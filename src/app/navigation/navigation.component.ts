@@ -7,6 +7,8 @@ import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
 import { inject } from '@angular/core/testing';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
+import { UserListService } from '../user-list.service';
 
 @Component({
   selector: 'app-navigation',
@@ -31,7 +33,7 @@ export class NavigationComponent implements OnInit {
   logout(){
     localStorage.removeItem('mytoken');
     localStorage.removeItem('myrole');
-   
+   this.route.navigate(['./weatherView']);
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -41,8 +43,13 @@ export class NavigationComponent implements OnInit {
     );
 
   constructor(private breakpointObserver: BreakpointObserver , public dialog: MatDialog,
-    @Inject(DOCUMENT) private document: Document , private renderer:Renderer2
-    ) {}
+    @Inject(DOCUMENT) private document: Document , private renderer:Renderer2, public route : Router,private service:UserListService
+    ) {
+      this.service.closeDialog.subscribe(() => {
+        this.closeDialog();
+        
+      })
+    }
 
 
   openLoginDialog(): void {
@@ -55,6 +62,19 @@ export class NavigationComponent implements OnInit {
         width: '280px',
         
       })};
+
+      closeDialog(){
+        this.dialog.closeAll();
+       
+      }
+
+      goToWeather(){
+        this.route.navigate(['./weatherView']);
+      }
+
+      goToMap(){
+        this.route.navigate(['./mapView']);
+      }
 
     
       theme: theme = 'light-theme';
